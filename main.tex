@@ -3,24 +3,29 @@
 \usepackage{hyperref}
 \usepackage{url}
 
-\title{gaiasprint}
-\author{dwm261 }
+\title{A Fully Probabilistic Forward Model of Color Magnitude Diagrams}
+\author{David Mykytyn \and Alex Malz}
 \date{March 2019}
 
 \begin{document}
 
 \maketitle
 
+\begin{abstract}
+  This paper will show a forward model for the creation of color magnitude diagrams for open clusters. We will use this forward model to generate a fully probabilistic color magnitude diagram, from which we can infer cluster membership and properties. By being able to disambiguate apparent double and triple stars, we will avoid throwing away the information which they contain.
+
+\end{abstract}
+  
 \section{Introduction}
 
-Despite its long history, we still lack an analytical form for the Hertzprung-Russel (HR) diagram. 
-One obstacle to constructing a forward model of the HR diagram, even for a single open cluster is the existence of apparent double and triple stars and interlopers. 
-We will build on the work [WIDMARK, LEISTEDT, HOGG] to infer the HR diagram of a contaminated cluster. 
-For the sprint, we want to be able to generate HR diagrams for open clusters from Gaia samples.
+ Despite its long history, we still lack an analytical form for the Hertzprung-Russel (HR) diagram. 
+ One obstacle to constructing a forward model of the HR diagram, even for a single open cluster is the existence of apparent double and triple stars and interlopers. 
+ We will build on the work [WIDMARK, LEISTEDT, HOGG] to infer the HR diagram of a contaminated cluster. 
+ For the sprint, we want to be able to generate HR diagrams for open clusters from Gaia samples.
 
 \section{Data}
 
-Gaia cluster catalog: \url{http://vizier.u-strasbg.fr/viz-bin/VizieR-3?-source=J/A%2bA/618/A93/members}
+Gaia cluster catalog: \url{http://vizier.u-strasbg.fr/viz-bin/VizieR-3?-source=J/A\%2bA/618/A93/members}
 For each cluster:\\
 For each star (as much as possible of):
     \begin{itemize}
@@ -33,8 +38,12 @@ For each star (as much as possible of):
 
 \section{Method}
 
-We build on \url{https://arxiv.org/abs/1801.08547}, which identifies the probability of an apparent single star being a true binary or trinary assuming it's on the Main Sequence.
+We build on \url{https://arxiv.org/abs/1801.08547}, which identifies the probability of an apparent single star being a true binary or triple assuming it's on the Main Sequence.
 Their code is public here: \url{https://github.com/AxelWidmark/Multiple-stellar-systems-in-TGAS/blob/master/Model.py}.
 We will use those probabilities to reconstruct the HR diagram of an open cluster.
 
+We transform the data via a normalized Principal Component Analysis (PCA), and fit a Gaussian Kernel Density Estimator in that space. We then use the inverse transform of the PCA to get a probability distribution in the CMD space. We next take samples from this probability distribution, and add them together to generate a probability distribution for optical double stars. 
+
 \end{document}
+
+% LocalWords:  PCA CMD
