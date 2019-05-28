@@ -42,7 +42,11 @@ We build on \url{https://arxiv.org/abs/1801.08547}, which identifies the probabi
 Their code is public here: \url{https://github.com/AxelWidmark/Multiple-stellar-systems-in-TGAS/blob/master/Model.py}.
 We will use those probabilities to reconstruct the HR diagram of an open cluster.
 
-We transform the data via a normalized Principal Component Analysis (PCA), and fit a Gaussian Kernel Density Estimator in that space. We then use the inverse transform of the PCA to get a probability distribution in the CMD space. We next take samples from this probability distribution, and add them together to generate a probability distribution for optical double stars. 
+We transform the data via a normalized Principal Component Analysis (PCA), and fit a Gaussian Kernel Density Estimator in that space. We then use the inverse transform of the PCA to get a probability distribution in the CMD space. We next take samples from this probability distribution, and add them together to generate a probability distribution for optical double stars.
+
+\section{Notes}
+Banyan XI - Gagné, et. al. \url{https://arxiv.org/pdf/1801.09051.pdf}\\ This is interesting to us because it has information we'd need if we want to incorporate physical/parallax/velocities of the cluster into our forward model p.s. check out their sick plotting.\\
+Banyan XIII - \url{https://arxiv.org/pdf/1805.11715.pdf}
 
 \end{document}
 
