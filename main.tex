@@ -1,0 +1,40 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{url}
+
+\title{gaiasprint}
+\author{dwm261 }
+\date{March 2019}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+Despite its long history, we still lack an analytical form for the Hertzprung-Russel (HR) diagram. 
+One obstacle to constructing a forward model of the HR diagram, even for a single open cluster is the existence of apparent double and triple stars and interlopers. 
+We will build on the work [WIDMARK, LEISTEDT, HOGG] to infer the HR diagram of a contaminated cluster. 
+For the sprint, we want to be able to generate HR diagrams for open clusters from Gaia samples.
+
+\section{Data}
+
+Gaia cluster catalog: \url{http://vizier.u-strasbg.fr/viz-bin/VizieR-3?-source=J/A%2bA/618/A93/members}
+For each cluster:\\
+For each star (as much as possible of):
+    \begin{itemize}
+        \item Mags
+        \item Colors
+        \item Proper motions
+        \item Angular location
+        \item Parallax
+    \end{itemize}
+
+\section{Method}
+
+We build on \url{https://arxiv.org/abs/1801.08547}, which identifies the probability of an apparent single star being a true binary or trinary assuming it's on the Main Sequence.
+Their code is public here: \url{https://github.com/AxelWidmark/Multiple-stellar-systems-in-TGAS/blob/master/Model.py}.
+We will use those probabilities to reconstruct the HR diagram of an open cluster.
+
+\end{document}
