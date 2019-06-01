@@ -96,7 +96,9 @@ def get_scores(colors, mags, apipe):
     return apipe[-1].score_samples(X_transform)
 
 
-def end2end(cluster):
+def end2end(cluster, verbose=True):
+    name = cluster['Cluster'][0]
+    if verbose: print("Starting on cluster: {}".format(name))
     the_color = 'BP-RP'
     the_mag = 'phot_rp_mean_mag'
     colors, mags = cluster[the_color], cluster[the_mag]
@@ -107,11 +109,17 @@ def end2end(cluster):
     # ylims = ymin, ymax
     # ranges = xlen, ylen
     pipe = pca_kde_pipe()
+    if verbose: print("Starting fit")
     pipe = pca_kde_fit(pipe, colors, mags)
     # xlin, ylin, xgrid, ygrid = gen_grid(xlims, ylims, ranges)
     # grids = xgrid, ygrid
+    if verbose: print("Adding samples")
     newmags, newcolors = get_added_samps(pipe, 100)
-    doublepipe = pca_kde_fit(pca_kde_pipe(), newcolors[::10], newmags[::10])
+    if verbose: print("Fitting doublepipe")
+    doublepipe = pca_kde_fit(pca_kde_pipe(),
+                             np.random.choice(newcolors, 100),
+                             np.random.choice(newmags, 100))
+    if verbose: print("Scoring samples")
     wget_scores = partial(get_scores, colors, mags)
     sscores = wget_scores(pipe)
     dscores = wget_scores(doublepipe)
