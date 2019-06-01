@@ -1,5 +1,7 @@
 from itertools import product, combinations, starmap
 from functools import partial
+from dataclasses import dataclass
+from typing import Any
 
 import numpy as np
 from sklearn.neighbors import KernelDensity as KD
@@ -7,6 +9,16 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.pipeline import Pipeline
 from sklearn.decomposition import PCA
 
+
+@dataclass
+class CMD:
+    name: str
+    cluster: Any
+    pipe: Any
+    doublepipe: Any
+    sscores: Any
+    dscores: Any
+    
 
 def pca_kde_pipe():
     pca = PCA(n_components=2, whiten=True)
@@ -126,4 +138,4 @@ def end2end(cluster, verbose=True):
     # dcolors, dmags = colors[sscores < dscores], mags[sscores < dscores]
     # newnewpipe = pca_kde_fit(pca_kde_pipe(), dcolors, dmags)
     # Make this into a named tuple, probably
-    return (cluster, pipe, doublepipe, sscores, dscores)
+    return CMD(name, cluster, pipe, doublepipe, sscores, dscores)
